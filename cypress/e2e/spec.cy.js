@@ -104,4 +104,10 @@ describe("Burrito Builder", () => {
     cy.get('.order').should('have.length', 2);
     cy.get('.order').first().contains('Sam');
   });
+  it('should not allow selecting the same ingredient multiple times', () => {
+    cy.get('input[name="name"]').type('Test User');
+    cy.contains('beans').click();
+    cy.contains('beans').click(); 
+    cy.get('p').contains('Order: beans');
+  });
 });
