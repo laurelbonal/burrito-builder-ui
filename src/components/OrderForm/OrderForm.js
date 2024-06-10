@@ -6,7 +6,7 @@ function OrderForm({ addOrder }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (name && ingredients.length > 1) {
+    if (name && ingredients.length > 0) {
       const newOrder = { name, ingredients };
       addOrder(newOrder);
       clearInputs();
@@ -67,7 +67,7 @@ function OrderForm({ addOrder }) {
 
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
 
-      <button type="submit" disabled={!name || ingredients.length < 2}>
+      <button type="submit" disabled={!name || ingredients.length === 0}>
         Submit Order
       </button>
     </form>
