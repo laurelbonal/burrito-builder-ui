@@ -24,7 +24,10 @@ function OrderForm({ addOrder }) {
 
   function addIngredient(e) {
     e.preventDefault();
-    setIngredients([...ingredients, e.target.name]);
+    const ingredient = e.target.name;
+    if (!ingredients.includes(ingredient)) {
+      setIngredients([...ingredients, ingredient]);
+    }
   }
 
   const possibleIngredients = [
