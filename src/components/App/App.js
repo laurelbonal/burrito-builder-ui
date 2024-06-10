@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getOrders, addOrder } from "../../apiCalls";
+import { getOrders, addOrder, deleteOrder } from "../../apiCalls";
 import Orders from "../../components/Orders/Orders";
 import OrderForm from "../../components/OrderForm/OrderForm";
 
@@ -19,6 +19,12 @@ function App() {
       .catch((err) => console.error("Error adding order:", err));
   };
 
+  const handleDeleteOrder = (orderId) => {
+    deleteOrder(orderId)
+      .then(() => setOrders(orders.filter(order => order.id !== orderId)))
+      .catch((err) => console.error("Error deleting order:", err));
+  };
+
   return (
     <main className="App">
       <header>
@@ -26,7 +32,7 @@ function App() {
         <OrderForm addOrder={handleAddOrder} />
       </header>
 
-      <Orders orders={orders} />
+      <Orders orders={orders} deleteOrder={handleDeleteOrder} />
     </main>
   );
 }
